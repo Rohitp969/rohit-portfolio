@@ -21,7 +21,6 @@ export default function TechIcon({ id, className = 'size-6' }) {
         src={item.logo}
         alt=""
         aria-hidden="true"
-        loading="lazy"
         decoding="async"
         className={`${className} object-contain ${item.mono ? 'dark:invert' : ''}`}
       />

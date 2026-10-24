@@ -16,6 +16,10 @@ import typescriptLogo from '../assets/tech/typescript.svg'
 import vercelLogo from '../assets/tech/vercel.svg'
 import vscodeLogo from '../assets/tech/vscode.svg'
 
+// Files in public/ must go through this so they work when the site is served from a
+// sub-path (GitHub Pages: /rohit-portfolio/) as well as from the domain root (Vercel, dev).
+const asset = (path) => `${import.meta.env.BASE_URL}${path}`
+
 export const profile = {
   name: 'Rohit Prajapati',
   role: 'MERN Stack / Full-Stack Web Developer',
@@ -24,7 +28,7 @@ export const profile = {
   email: 'rp1485260@gmail.com',
   // Shown in the Contact section. Set to '' to hide it from the site.
   phone: '+91 73486 75919',
-  // Add a square photo at public/profile.jpg and set photo: '/profile.jpg'.
+  // Add a square photo at public/profile.jpg and set photo: asset('profile.jpg').
   // Until then a monogram is shown.
   photo: '',
   availability: 'Open to full-stack developer roles',
@@ -33,7 +37,7 @@ export const profile = {
   // The hero cycles through these once, then settles on the first.
   buildWords: ['full-stack websites', 'REST APIs', 'secure auth flows', 'responsive interfaces'],
   resume: {
-    url: '/resume.pdf',
+    url: asset('resume.pdf'),
     downloadName: 'Rohit-Prajapati-Resume.pdf',
   },
 }
@@ -171,7 +175,7 @@ export const projects = [
       'Order totals calculated on the server; hashed OTPs with attempt limits',
     ],
     stack: ['React 19', 'Redux Toolkit', 'Tailwind CSS', 'Node.js', 'Express 5', 'MongoDB', 'JWT', 'Razorpay', 'Cloudinary'],
-    image: '/projects/ekart.webp',
+    image: asset('projects/ekart.webp'),
     imageAlt: 'Ekart e-commerce website home page',
     liveUrl: 'https://ecart-silk-six.vercel.app/',
     repoUrl: 'https://github.com/Rohitp969/ecart',
@@ -190,7 +194,7 @@ export const projects = [
       'Admin panel with sales charts, menu management and order reports exported to PDF',
     ],
     stack: ['React', 'Context API', 'Tailwind CSS', 'Chart.js', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Razorpay'],
-    image: '/projects/food-delivery.webp',
+    image: asset('projects/food-delivery.webp'),
     imageAlt: 'GoFood food delivery website home page',
     liveUrl: 'https://food-delivery-rho-rosy.vercel.app/',
     repoUrl: 'https://github.com/Rohitp969/food-delivery',
