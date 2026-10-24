@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rohit Prajapati | MERN Stack &amp; Full-Stack Web Developer</title>
+    <meta
+      name="description"
+      content="Rohit Prajapati is a MERN stack and full-stack web developer in Noida, India. Explore his live e-commerce and food delivery websites built with React, Node.js, Express and MongoDB."
+    />
+    <meta name="author" content="Rohit Prajapati" />
+    <meta name="theme-color" content="#101116" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph / social previews -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Rohit Prajapati | MERN Stack & Full-Stack Web Developer" />
+    <meta
+      property="og:description"
+      content="Full-stack developer building responsive websites with React, REST APIs with Node.js and Express, JWT authentication and MongoDB."
+    />
+    <meta name="twitter:card" content="summary" />
+    <!--
+      After deploying, add your real domain:
+      <link rel="canonical" href="https://your-domain.vercel.app/" />
+      <meta property="og:url" content="https://your-domain.vercel.app/" />
+      <meta property="og:image" content="https://your-domain.vercel.app/og-image.png" />  (1200x630 PNG in public/)
+    -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Mona+Sans:wdth,wght@75..125,200..900&display=swap"
+    />
+
+    <!-- Apply the saved theme before first paint to avoid a flash. -->
+    <script>
+      ;(function () {
+        var theme = 'dark'
+        try {
+          if (localStorage.getItem('theme') === 'light') theme = 'light'
+        } catch (e) {}
+        document.documentElement.dataset.theme = theme
+        if (theme === 'light') {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f5f6fa')
+        }
+      })()
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Rohit Prajapati",
+        "jobTitle": "MERN Stack / Full-Stack Web Developer",
+        "email": "mailto:rp1485260@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Noida",
+          "addressRegion": "Uttar Pradesh",
+          "addressCountry": "IN"
+        },
+        "sameAs": [
+          "https://github.com/Rohitp969",
+          "https://www.linkedin.com/in/rohit-prajapati-954a8527a"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
