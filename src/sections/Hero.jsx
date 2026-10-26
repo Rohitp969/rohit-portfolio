@@ -1,73 +1,72 @@
 import { motion } from 'framer-motion'
 import { ArrowDown, Mail, MapPin } from 'lucide-react'
+import ApiConsole from '../components/ApiConsole'
 import { GithubIcon, LinkedinIcon } from '../components/BrandIcons'
-import CodeWindow from '../components/CodeWindow'
 import ResumeButton from '../components/ResumeButton'
-import RotatingWords from '../components/RotatingWords'
-import { profile, socials, stats } from '../data/portfolioData'
+import { experience, profile, projects, socials } from '../data/portfolioData'
 import { buttonStyles, iconButtonStyles } from '../lib/styles'
 
 const socialIcons = { github: GithubIcon, linkedin: LinkedinIcon }
+const internship = experience[0]
+const liveCount = projects.filter((project) => project.liveUrl).length
+const countWords = ['No', 'One', 'Two', 'Three', 'Four', 'Five']
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } },
 }
 const item = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+  hidden: { opacity: 0, y: 14 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 }
 
 export default function Hero() {
-  return (
-    <section id="top" aria-labelledby="hero-title" className="relative isolate overflow-hidden">
-      {/* Background: soft grid fading out, two colour glows */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-        <div className="bg-grid absolute inset-0 [mask-image:radial-gradient(ellipse_75%_65%_at_50%_0%,#000_30%,transparent_100%)]" />
-        <div className="absolute -top-40 left-[8%] h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(closest-side,var(--c-glow-1),transparent)] blur-2xl" />
-        <div className="absolute -top-24 right-[4%] h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(closest-side,var(--c-glow-2),transparent)] blur-2xl" />
-      </div>
+  const [firstName, ...rest] = profile.name.split(' ')
 
-      <div className="mx-auto grid min-h-[min(100svh,58rem)] max-w-6xl items-center gap-16 px-4 pt-32 pb-20 sm:px-6 sm:pt-36 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12 lg:px-8 lg:pt-32">
-        <motion.div variants={container} initial="hidden" animate="show">
+  return (
+    <section id="top" aria-labelledby="hero-title" className="relative isolate">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 pt-28 pb-12 sm:px-6 sm:pt-32 sm:pb-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14 lg:px-8 lg:pt-32 lg:pb-16">
+        <motion.div variants={container} initial="hidden" animate="show" className="min-w-0">
           <motion.p
             variants={item}
-            className="inline-flex items-center gap-2.5 rounded-full border border-success/30 bg-success/10 py-1.5 pr-4 pl-3 text-sm font-medium text-fg"
+            className="inline-flex items-center gap-2.5 rounded-full border border-success/30 bg-success/10 py-1.5 pr-3.5 pl-3 text-sm font-medium text-fg"
           >
-            <span className="relative flex size-2.5">
+            <span className="relative flex size-2">
               <span className="animate-ping-slow absolute inline-flex size-full rounded-full bg-success opacity-60 motion-reduce:animate-none" />
-              <span className="relative inline-flex size-2.5 rounded-full bg-success" />
+              <span className="relative inline-flex size-2 rounded-full bg-success" />
             </span>
             {profile.availability}
           </motion.p>
 
-          <motion.h1 variants={item} id="hero-title" className="mt-7">
-            <span className="block text-xl font-medium tracking-normal text-muted [font-stretch:100%] sm:text-2xl">
-              Hi, I&apos;m
-            </span>
-            <span className="text-gradient mt-1 block pb-1 text-[clamp(2.75rem,1.5rem+5.2vw,5rem)] leading-[1.02] font-semibold tracking-[-0.035em]">
-              {profile.name}
-            </span>
+          <motion.h1
+            variants={item}
+            id="hero-title"
+            className="font-display mt-7 text-[clamp(3rem,1.9rem+4.6vw,5.25rem)] leading-[0.95]"
+          >
+            <span className="block">{firstName}</span>
+            <span className="block">{rest.join(' ')}</span>
+            <span className="sr-only">, {profile.role}</span>
           </motion.h1>
 
           <motion.p
             variants={item}
-            className="mt-5 text-[clamp(1.25rem,1.05rem+0.8vw,1.625rem)] leading-snug font-medium [font-stretch:106%]"
+            className="mt-7 max-w-[30ch] text-[clamp(1.25rem,1.05rem+0.85vw,1.625rem)] leading-snug font-medium text-fg [font-stretch:105%]"
           >
-            I build <RotatingWords words={profile.buildWords} />
+            {profile.headline}
           </motion.p>
 
-          <motion.p variants={item} className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
-            {profile.intro}
+          <motion.p variants={item} className="mt-4 max-w-[52ch] leading-relaxed text-muted">
+            Recently a {internship.role} at {internship.company.replace(' Pvt. Ltd.', '')}. {countWords[liveCount] ?? liveCount} live
+            projects with online payments, sign-in and admin dashboards.
           </motion.p>
 
           <motion.div variants={item} className="mt-9 flex flex-wrap items-center gap-3">
-            <a href="#projects" className={buttonStyles.primary}>
-              View my work
+            <a href="#projects" className={`${buttonStyles.primary} max-sm:w-full`}>
+              View projects
               <ArrowDown className="size-4" aria-hidden="true" />
             </a>
-            <ResumeButton />
-            <div className="flex items-center gap-2 sm:ml-1">
+            <ResumeButton className="max-sm:w-full" />
+            <div className="flex items-center gap-2">
               {socials.map((social) => {
                 const Icon = socialIcons[social.id]
                 return (
@@ -90,34 +89,19 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          <motion.dl variants={item} className="mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-line pt-7">
-            {stats.map((stat) => (
-              <div key={stat.label}>
-                <dt className="sr-only">{stat.label}</dt>
-                <dd>
-                  <span className="block text-[clamp(1.5rem,1.2rem+1.2vw,2rem)] leading-none font-semibold tracking-tight [font-stretch:112.5%]">
-                    {stat.value}
-                  </span>
-                  <span aria-hidden="true" className="mt-2 block text-sm leading-snug text-muted">
-                    {stat.label}
-                  </span>
-                </dd>
-              </div>
-            ))}
-          </motion.dl>
-
           <motion.p variants={item} className="mt-8 flex items-center gap-2 text-sm text-subtle">
-            <MapPin className="size-4 text-accent" aria-hidden="true" />
+            <MapPin className="size-4" aria-hidden="true" />
             {profile.location}
           </motion.p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 24, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          className="min-w-0"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          <CodeWindow />
+          <ApiConsole />
         </motion.div>
       </div>
     </section>

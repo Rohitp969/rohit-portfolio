@@ -3,63 +3,63 @@
 /* Make any `dark:` utility follow the theme toggle rather than the OS setting. */
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
-/* Theme tokens. Dark is the default; [data-theme] is set on <html> before first paint. */
+/*
+ * Theme tokens. Dark is the default; [data-theme] is set on <html> before first paint.
+ * Ink surfaces with one amber accent. Amber is also the POST colour in the API console,
+ * so the "get in touch" actions share it; green is kept for GET and 2xx responses.
+ */
 :root,
 [data-theme='dark'] {
   color-scheme: dark;
-  --c-bg: #101116;
-  --c-surface: #17181f;
-  --c-surface-2: #20212a;
-  --c-line: #282a35;
-  --c-line-strong: #363947;
-  --c-field: #6b6e88;
-  --c-fg: #f1f0f7;
-  --c-muted: #a9a9bd;
-  --c-subtle: #8a8ba2;
-  --c-accent: #b39dff;
-  --c-accent-2: #7cb4ff;
-  --c-danger: #ff8a8a;
-  --c-success: #6ee7a8;
-  --c-glow-1: rgb(139 108 255 / 0.22);
-  --c-glow-2: rgb(79 152 255 / 0.18);
-  --c-grid: rgb(255 255 255 / 0.045);
-  --c-shadow: rgb(0 0 0 / 0.55);
+  --c-bg: #0f131a;
+  --c-surface: #151a23;
+  --c-surface-2: #1c2230;
+  --c-line: #252c3a;
+  --c-line-strong: #343d50;
+  --c-field: #5a647a;
+  --c-fg: #e8ecf2;
+  --c-muted: #a2acbd;
+  --c-subtle: #8792a6;
+  --c-accent: #f4b144;
+  --c-accent-fill: #f4b144;
+  --c-on-accent: #1a1205;
+  --c-get: #5dd39e;
+  --c-danger: #ff8a80;
+  --c-success: #5dd39e;
+  --c-shadow: rgb(0 0 0 / 0.5);
 
-  /* Code window syntax colours */
-  --code-keyword: #c792ea;
-  --code-name: #82aaff;
-  --code-prop: #e4e4ef;
-  --code-string: #c3e88d;
-  --code-bool: #f78c6c;
-  --code-punct: #8a8ba2;
+  /* JSON and code colours */
+  --code-key: #8fb8ff;
+  --code-string: #b5e08f;
+  --code-number: #f4b144;
+  --code-bool: #f49a6c;
+  --code-punct: #6f7a8e;
 }
 
 [data-theme='light'] {
   color-scheme: light;
-  --c-bg: #f5f6fa;
+  --c-bg: #f3f5f8;
   --c-surface: #ffffff;
-  --c-surface-2: #eef0f6;
-  --c-line: #e0e2eb;
-  --c-line-strong: #c9ccda;
-  --c-field: #878aa0;
-  --c-fg: #15151d;
-  --c-muted: #4b4c60;
-  --c-subtle: #62637a;
-  --c-accent: #5a3ed0;
-  --c-accent-2: #2457c5;
-  --c-danger: #c22a2a;
-  --c-success: #13804b;
-  --c-glow-1: rgb(124 92 250 / 0.16);
-  --c-glow-2: rgb(59 123 255 / 0.13);
-  --c-grid: rgb(20 22 40 / 0.06);
-  --c-shadow: rgb(30 35 70 / 0.16);
+  --c-surface-2: #ebeef3;
+  --c-line: #dde2ea;
+  --c-line-strong: #c5ccd8;
+  --c-field: #7d869a;
+  --c-fg: #121821;
+  --c-muted: #465062;
+  --c-subtle: #5b6578;
+  --c-accent: #9a5800;
+  --c-accent-fill: #f2a93b;
+  --c-on-accent: #1a1205;
+  --c-get: #11804f;
+  --c-danger: #c62828;
+  --c-success: #11804f;
+  --c-shadow: rgb(25 35 60 / 0.14);
 
-  --code-keyword: #7c3aed;
-  --code-name: #2457c5;
-  --code-prop: #1f2030;
-  --code-string: #15803d;
-  --code-bool: #c2410c;
-  --code-punct: #62637a;
+  --code-key: #2453b8;
+  --code-string: #2f7d32;
+  --code-number: #9a5800;
+  --code-bool: #b4461b;
+  --code-punct: #6b7385;
 }
 
 @theme inline {
@@ -73,15 +73,14 @@
   --color-muted: var(--c-muted);
   --color-subtle: var(--c-subtle);
   --color-accent: var(--c-accent);
-  --color-accent-2: var(--c-accent-2);
+  --color-accent-fill: var(--c-accent-fill);
+  --color-on-accent: var(--c-on-accent);
+  --color-get: var(--c-get);
   --color-danger: var(--c-danger);
   --color-success: var(--c-success);
-  --color-glow-1: var(--c-glow-1);
-  --color-glow-2: var(--c-glow-2);
-  --color-code-keyword: var(--code-keyword);
-  --color-code-name: var(--code-name);
-  --color-code-prop: var(--code-prop);
+  --color-code-key: var(--code-key);
   --color-code-string: var(--code-string);
+  --color-code-number: var(--code-number);
   --color-code-bool: var(--code-bool);
   --color-code-punct: var(--code-punct);
 }
@@ -89,21 +88,11 @@
 @theme {
   --font-sans: 'Mona Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
-  --color-brand-from: #6d4ae8;
-  --color-brand-to: #2f6be6;
 
-  --animate-marquee: marquee 45s linear infinite;
-  --animate-blink: blink 1.1s step-end infinite;
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
   --animate-ping-slow: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
-  }
+  --animate-blink: blink 1.1s step-end infinite;
 
   @keyframes blink {
     50% {
@@ -112,60 +101,16 @@
   }
 }
 
-/* Primary action, progress bar, timeline nodes. */
-@utility bg-brand-gradient {
-  background-image: linear-gradient(120deg, var(--color-brand-from) 0%, #5257e9 45%, var(--color-brand-to) 100%);
-}
-
-@utility bg-brand-gradient-soft {
-  background-image: linear-gradient(90deg, var(--c-accent) 0%, var(--c-accent-2) 100%);
-}
-
-@utility text-gradient {
-  background-image: linear-gradient(100deg, var(--c-fg) 15%, var(--c-accent) 55%, var(--c-accent-2) 95%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* 1px gradient outline that follows the element's border radius. */
-@utility gradient-border {
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 1px;
-    border-radius: inherit;
-    background: linear-gradient(
-      140deg,
-      color-mix(in srgb, var(--c-accent) 70%, transparent),
-      var(--c-line) 35%,
-      var(--c-line) 65%,
-      color-mix(in srgb, var(--c-accent-2) 60%, transparent)
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask:
-      linear-gradient(#000 0 0) content-box exclude,
-      linear-gradient(#000 0 0);
-    pointer-events: none;
-  }
-}
-
-@utility bg-grid {
-  background-image:
-    linear-gradient(to right, var(--c-grid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--c-grid) 1px, transparent 1px);
-  background-size: 56px 56px;
+/* Wide, heavy display type: the name in the hero and section headings. */
+@utility font-display {
+  font-stretch: 118%;
+  font-weight: 650;
+  letter-spacing: -0.028em;
 }
 
 @layer base {
   html {
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 5rem;
     -webkit-text-size-adjust: 100%;
   }
 
@@ -180,7 +125,7 @@
     background-color: var(--c-bg);
     color: var(--c-fg);
     font-family: var(--font-sans);
-    font-size: 1rem;
+    font-size: 1.0625rem;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -189,9 +134,10 @@
 
   h1,
   h2,
-  h3 {
+  h3,
+  h4 {
     color: var(--c-fg);
-    font-stretch: 112.5%;
+    font-stretch: 110%;
     text-wrap: balance;
   }
 
@@ -202,11 +148,17 @@
   }
 
   ::selection {
-    background-color: color-mix(in srgb, var(--c-accent) 32%, transparent);
+    background-color: color-mix(in srgb, var(--c-accent-fill) 35%, transparent);
   }
 
   :focus-visible {
     outline: 2px solid var(--c-accent);
     outline-offset: 3px;
+  }
+
+  /* Native <dialog> backdrop for the command palette. */
+  dialog::backdrop {
+    background: rgb(5 8 14 / 0.6);
+    backdrop-filter: blur(2px);
   }
 }

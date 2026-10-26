@@ -4,7 +4,7 @@ import { GithubIcon, LinkedinIcon } from '../components/BrandIcons'
 import Reveal from '../components/Reveal'
 import Section from '../components/Section'
 import { profile, socials } from '../data/portfolioData'
-import { buttonStyles } from '../lib/styles'
+import { buttonStyles, cardStyles, methodStyles } from '../lib/styles'
 
 // Optional: set VITE_CONTACT_ENDPOINT (e.g. a Formspree form URL) to send messages
 // from the page. Without it, the form opens the visitor's email app instead.
@@ -39,23 +39,16 @@ export default function Contact() {
   return (
     <Section
       id="contact"
-      eyebrow="Contact"
       title="Let's build something together"
       description="Hiring for a full-stack or MERN role, or have a project in mind? I'd love to hear from you. Email is the quickest way to reach me."
     >
-      <div className="relative">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute -top-24 -left-16 size-[30rem] rounded-full bg-[radial-gradient(closest-side,var(--c-glow-1),transparent)] blur-2xl" />
-          <div className="absolute -right-16 -bottom-24 size-[28rem] rounded-full bg-[radial-gradient(closest-side,var(--c-glow-2),transparent)] blur-2xl" />
-        </div>
-        <div className="grid gap-4 lg:grid-cols-[1fr_1.3fr]">
-          <Reveal>
-            <ContactDetails />
-          </Reveal>
-          <Reveal delay={0.08}>
-            <ContactForm />
-          </Reveal>
-        </div>
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]">
+        <Reveal className="min-w-0">
+          <ContactDetails />
+        </Reveal>
+        <Reveal delay={0.08} className="min-w-0">
+          <ContactForm />
+        </Reveal>
       </div>
     </Section>
   )
@@ -83,7 +76,7 @@ function ContactDetails() {
   const linkClass = 'block truncate rounded font-medium text-fg underline-offset-4 hover:text-accent hover:underline'
 
   return (
-    <div className="gradient-border flex h-full flex-col rounded-3xl bg-surface/90 backdrop-blur">
+    <div className={`${cardStyles} flex h-full flex-col overflow-hidden`}>
       <div className="px-5 pt-6 pb-4 sm:px-6">
         <h3 className="text-xl font-semibold">Contact details</h3>
         <p className="mt-1.5 text-sm text-muted">Reach out directly, or use the form.</p>
@@ -247,12 +240,19 @@ function ContactForm() {
       onSubmit={handleSubmit}
       noValidate
       aria-labelledby="contact-form-title"
-      className="gradient-border h-full rounded-3xl bg-surface/90 p-6 backdrop-blur sm:p-8"
+      className={`${cardStyles} h-full p-6 sm:p-8`}
     >
-      <h3 id="contact-form-title" className="text-xl font-semibold">
-        Send a message
-      </h3>
-      <p className="mt-1.5 text-sm text-muted">All fields are required.</p>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h3 id="contact-form-title" className="text-xl font-semibold">
+            Send a message
+          </h3>
+          <p className="mt-1.5 text-sm text-muted">All fields are required.</p>
+        </div>
+        <span aria-hidden="true" className="hidden rounded-md border border-line bg-bg/60 px-2 py-1 font-mono text-xs text-subtle sm:inline-block">
+          <span className={`font-semibold ${methodStyles.POST}`}>POST</span> /contact
+        </span>
+      </div>
 
       <div className="mt-7 grid gap-5 sm:grid-cols-2">
         <Field
@@ -362,7 +362,7 @@ function Field({ id, label, error, hint, multiline = false, className = '', inpu
   const errorId = `${id}-error`
   const hintId = `${id}-hint`
   const describedBy = error ? errorId : hint ? hintId : undefined
-  const inputClass = `block w-full rounded-xl border bg-bg/70 px-4 text-[0.9375rem] text-fg transition-[border-color,box-shadow] focus-visible:border-accent focus-visible:ring-4 focus-visible:ring-accent/20 focus-visible:outline-none ${
+  const inputClass = `block w-full rounded-[10px] border bg-bg/70 px-4 text-[0.9375rem] text-fg transition-[border-color,box-shadow] focus-visible:border-accent focus-visible:ring-4 focus-visible:ring-accent-fill/25 focus-visible:outline-none ${
     error ? 'border-danger' : 'border-field'
   } ${multiline ? 'min-h-36 resize-y py-3 leading-relaxed' : 'h-12'}`
 

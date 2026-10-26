@@ -1,8 +1,8 @@
 import { MotionConfig } from 'framer-motion'
+import CommandPalette from './components/CommandPalette'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import ScrollProgress from './components/ScrollProgress'
-import TechMarquee from './components/TechMarquee'
 import About from './sections/About'
 import Contact from './sections/Contact'
 import Education from './sections/Education'
@@ -24,7 +24,6 @@ export default function App() {
       <Navbar />
       <main id="main" tabIndex={-1} className="overflow-x-clip focus:outline-none">
         <Hero />
-        <TechMarquee />
         <About />
         <Skills />
         <Projects />
@@ -33,6 +32,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <CommandPalette />
     </MotionConfig>
   )
 }

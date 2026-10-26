@@ -32,10 +32,10 @@ export const profile = {
   // Until then a monogram is shown.
   photo: '',
   availability: 'Open to full-stack developer roles',
+  // The large line under the name in the hero.
+  headline: 'I build full-stack web apps, from the React interface to the API and database behind it.',
   intro:
     'Full-stack developer with a strong foundation in the MERN stack. I build responsive, scalable websites with RESTful APIs, JWT authentication and modern state management, and deploy them end to end.',
-  // The hero cycles through these once, then settles on the first.
-  buildWords: ['full-stack websites', 'REST APIs', 'secure auth flows', 'responsive interfaces'],
   resume: {
     url: asset('resume.pdf'),
     downloadName: 'Rohit-Prajapati-Resume.pdf',
@@ -59,12 +59,6 @@ export const navLinks = [
   { id: 'experience', label: 'Experience' },
   { id: 'education', label: 'Education' },
   { id: 'contact', label: 'Contact' },
-]
-
-export const stats = [
-  { value: '2', label: 'Live full-stack websites' },
-  { value: '3-month', label: 'MERN internship' },
-  { value: '20+', label: 'Tools and technologies' },
 ]
 
 // Every technology shown on the site. `logo` is an image; `icon` is a Lucide icon key
@@ -93,11 +87,6 @@ export const tech = {
   vercel: { name: 'Vercel', logo: vercelLogo, mono: true },
   render: { name: 'Render', icon: 'cloud' },
 }
-
-export const marqueeTech = [
-  'react', 'nodejs', 'express', 'mongodb', 'redux', 'javascript', 'tailwind',
-  'html5', 'css3', 'bootstrap', 'git', 'github', 'postman', 'vercel', 'vscode', 'typescript',
-]
 
 export const skillGroups = [
   {
@@ -158,11 +147,14 @@ export const about = {
   languages: ['English', 'Hindi'],
 }
 
-// Projects come from the GitHub repositories and their READMEs.
-// Each project gets a large card with a screenshot (put images in public/projects/).
+// Projects come from the GitHub repositories, their READMEs and package.json files.
+// Each project gets a large card with a full-page screenshot of the live site
+// (put images in public/projects/). `previewSize` is the image's width and height.
+// `uses` lists ids from `tech` above; the Skills section highlights them per project.
 export const projects = [
   {
     id: 'ekart',
+    name: 'Ekart',
     title: 'Ekart: E-Commerce Website',
     tagline: 'A full-stack MERN e-commerce website with online payments and an admin dashboard.',
     description:
@@ -175,13 +167,19 @@ export const projects = [
       'Order totals calculated on the server; hashed OTPs with attempt limits',
     ],
     stack: ['React 19', 'Redux Toolkit', 'Tailwind CSS', 'Node.js', 'Express 5', 'MongoDB', 'JWT', 'Razorpay', 'Cloudinary'],
-    image: asset('projects/ekart.webp'),
-    imageAlt: 'Ekart e-commerce website home page',
+    uses: [
+      'react', 'redux', 'javascript', 'html5', 'css3', 'tailwind', 'responsive',
+      'nodejs', 'express', 'mongodb', 'mongoose', 'rest', 'jwt', 'git', 'github', 'vercel',
+    ],
+    preview: asset('projects/ekart-full.webp'),
+    previewSize: [960, 5104],
+    imageAlt: 'Ekart e-commerce website home page, from the category bar and banner down to the footer',
     liveUrl: 'https://ecart-silk-six.vercel.app/',
     repoUrl: 'https://github.com/Rohitp969/ecart',
   },
   {
     id: 'food-delivery',
+    name: 'GoFood',
     title: 'GoFood: Food Delivery Website',
     tagline: 'A full-stack MERN food ordering website with separate customer and admin panels.',
     description:
@@ -194,8 +192,13 @@ export const projects = [
       'Admin panel with sales charts, menu management and order reports exported to PDF',
     ],
     stack: ['React', 'Context API', 'Tailwind CSS', 'Chart.js', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Razorpay'],
-    image: asset('projects/food-delivery.webp'),
-    imageAlt: 'GoFood food delivery website home page',
+    uses: [
+      'react', 'context', 'javascript', 'html5', 'css3', 'tailwind', 'responsive',
+      'nodejs', 'express', 'mongodb', 'mongoose', 'rest', 'jwt', 'git', 'github', 'vercel',
+    ],
+    preview: asset('projects/food-delivery-full.webp'),
+    previewSize: [960, 1516],
+    imageAlt: 'GoFood food delivery website home page with search and a grid of restaurant cards',
     liveUrl: 'https://food-delivery-rho-rosy.vercel.app/',
     repoUrl: 'https://github.com/Rohitp969/food-delivery',
   },
@@ -216,6 +219,7 @@ export const experience = [
       'Collaborated with mentors on code reviews, debugging and version control workflows using Git and GitHub.',
     ],
     stack: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'Git', 'GitHub'],
+    uses: ['mongodb', 'express', 'react', 'nodejs', 'javascript', 'rest', 'git', 'github'],
   },
 ]
 
